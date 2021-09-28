@@ -16,7 +16,7 @@ spec:
     matchLabels:
       {{- include "missing-container-metrics.selectorLabels" . | nindent 6 }}
   podMetricsEndpoints:
-  - port: http
+    {{- toYaml .Values.prometheusOperator.podMonitor.podMetricsEndpoints | nindent 4 }}
   namespaceSelector:
     matchNames:
       - {{ .Release.Namespace }}

@@ -55,6 +55,9 @@ prometheusOperator:
     # Additional labels to add to the PodMonitor so it matches the Operator's podMonitorSelector
     selector:
       # release: "kube-prometheus-stack"
+    # This can be used for relablings and adapting the endpoint
+    podMetricsEndpoints:
+      - port: http
 
   prometheusRule:
     # Create a Prometheus Operator PrometheusRule resource
@@ -79,4 +82,3 @@ prometheusOperator:
       expr: max(increase(container_ooms[15m])) by (exported_namespace, exported_pod) > 10
       labels:
         severity: critical
-
